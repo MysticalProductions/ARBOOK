@@ -8,11 +8,14 @@
             const videoElements = [];
             let currentVideo = null;
             const previewButton = document.querySelector("#preview");
-            const targetEntity =  document.querySelector('#mytarget');
+            const targetEntities = [];
+
             for (let i = 0; i < 10; i++) {
-                
-                const videoElement = document.querySelector(`#video-${i}`);
+                const targetEntity = document.querySelector(`#mytarget-${i}`); // Unique IDs
+                targetEntities.push(targetEntity);
+                const videoElement = document.querySelector(`#video-${i + 1}`);
                 videoElements.push(videoElement);
+
                 targetEntity.addEventListener("targetFound", event => {
                     currentVideo = videoElement;
                     previewButton.setAttribute("visible", true);
@@ -59,43 +62,43 @@
         <a-image id="preview" visible="false" class="clickable" src="#preview-image" alpha-test="0.5" width="0.2" height="0.2" position="0 0 0.1">
         </a-image>
 
-        <a-entity id="mytarget" mindar-image-target="targetIndex: 0">
+        <a-entity id="mytarget-0" mindar-image-target="targetIndex: 0">
             <a-video webkit-playsinline playsinline width="1" height="0.552" position="0 0 0" src="#video-1"></a-video>
         </a-entity>
 
-        <a-entity id="mytarget" mindar-image-target="targetIndex: 1">
+        <a-entity id="mytarget-1" mindar-image-target="targetIndex: 1">
             <a-video webkit-playsinline playsinline width="1" height="0.552" position="0 0 0" src="#video-2"></a-video>
         </a-entity>
 
-        <a-entity id="mytarget" mindar-image-target="targetIndex: 2">
+        <a-entity id="mytarget-2" mindar-image-target="targetIndex: 2">
             <a-video webkit-playsinline playsinline width="1" height="0.552" position="0 0 0" src="#video-3"></a-video>
         </a-entity>
 
-        <a-entity id="mytarget" mindar-image-target="targetIndex: 3">
+        <a-entity id="mytarget-3" mindar-image-target="targetIndex: 3">
             <a-video webkit-playsinline playsinline width="1" height="0.552" position="0 0 0" src="#video-4"></a-video>
         </a-entity>
 
-        <a-entity id="mytarget" mindar-image-target="targetIndex: 4">
+        <a-entity id="mytarget-4" mindar-image-target="targetIndex: 4">
             <a-video webkit-playsinline playsinline width="1" height="0.552" position="0 0 0" src="#video-5"></a-video>
         </a-entity>
 
-        <a-entity id="mytarget" mindar-image-target="targetIndex: 5">
+        <a-entity id="mytarget-5" mindar-image-target="targetIndex: 5">
             <a-video webkit-playsinline playsinline width="1" height="0.552" position="0 0 0" src="#video-6"></a-video>
         </a-entity>
 
-        <a-entity id="mytarget" mindar-image-target="targetIndex: 6">
+        <a-entity id="mytarget-6" mindar-image-target="targetIndex: 6">
             <a-video webkit-playsinline playsinline width="1" height="0.552" position="0 0 0" src="#video-7"></a-video>
         </a-entity>
 
-        <a-entity id="mytarget" mindar-image-target="targetIndex: 7">
+        <a-entity id="mytarget-7" mindar-image-target="targetIndex: 7">
             <a-video webkit-playsinline playsinline width="1" height="0.552" position="0 0 0" src="#video-8"></a-video>
         </a-entity>
 
-        <a-entity id="mytarget" mindar-image-target="targetIndex: 8">
+        <a-entity id="mytarget-8" mindar-image-target="targetIndex: 8">
             <a-video webkit-playsinline playsinline width="1" height="0.552" position="0 0 0" src="#video-9"></a-video>
         </a-entity>
 
-        <a-entity id="mytarget" mindar-image-target="targetIndex: 9">
+        <a-entity id="mytarget-9" mindar-image-target="targetIndex: 9">
             <a-video webkit-playsinline playsinline width="1" height="0.552" position="0 0 0" src="#video-10"></a-video>
         </a-entity>
     </a-scene>
