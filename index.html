@@ -1,1 +1,103 @@
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
+    <script>
+        window.onload = function () {
+            const videoElements = [];
+            let currentVideo = null;
+            const previewButton = document.querySelector("#preview");
 
+            for (let i = 0; i < 10; i++) {
+                
+                const videoElement = document.querySelector(`#video-${i}`);
+                videoElements.push(videoElement);
+                targetEntity.addEventListener("targetFound", event => {
+                    currentVideo = videoElement;
+                    previewButton.setAttribute("visible", true);
+                });
+
+                targetEntity.addEventListener("targetLost", event => {
+                    if (currentVideo === videoElement) {
+                        videoElement.pause();
+                        videoElement.currentTime = 0;
+                        previewButton.setAttribute("visible", false);
+                        currentVideo = null;
+                    }
+                });
+            }
+
+            previewButton.addEventListener('click', () => {
+                if (currentVideo) {
+                    previewButton.setAttribute("visible", false);
+                    currentVideo.play();
+                }
+            });
+        };
+    </script>
+</head>
+<body>
+    <a-scene videohandler mindar-image="imageTargetSrc: ./targets.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+        <a-assets>
+            <img id="preview-image" src="./play.png" />
+            <video id="video-1" autoplay="false" loop="true" src="./Videos/1.mp4"></video>
+            <video id="video-2" autoplay="false" loop="true" src="./Videos/2.mp4"></video>
+            <video id="video-3" autoplay="false" loop="true" src="./Videos/3.mp4"></video>
+            <video id="video-4" autoplay="false" loop="true" src="./Videos/4.mp4"></video>
+            <video id="video-5" autoplay="false" loop="true" src="./Videos/5.mp4"></video>
+            <video id="video-6" autoplay="false" loop="true" src="./Videos/6.mp4"></video>
+            <video id="video-7" autoplay="false" loop="true" src="./Videos/7.mp4"></video>
+            <video id="video-8" autoplay="false" loop="true" src="./Videos/8.mp4"></video>
+            <video id="video-9" autoplay="false" loop="true" src="./Videos/9.mp4"></video>
+            <video id="video-10" autoplay="false" loop="true" src="./Videos/10.mp4"></video>
+        </a-assets>
+
+        <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;" raycaster="far: 10000; objects: .clickable">
+        </a-camera>
+
+        <a-image id="preview" visible="false" class="clickable" src="#preview-image" alpha-test="0.5" width="0.2" height="0.2" position="0 0 0.1">
+        </a-image>
+
+        <a-entity id="target-0" mindar-image-target="targetIndex: 0">
+            <a-video webkit-playsinline playsinline width="1" height="0.552" position="0 0 0" src="#video-1"></a-video>
+        </a-entity>
+
+        <a-entity id="target-1" mindar-image-target="targetIndex: 1">
+            <a-video webkit-playsinline playsinline width="1" height="0.552" position="0 0 0" src="#video-2"></a-video>
+        </a-entity>
+
+        <a-entity id="target-2" mindar-image-target="targetIndex: 2">
+            <a-video webkit-playsinline playsinline width="1" height="0.552" position="0 0 0" src="#video-3"></a-video>
+        </a-entity>
+
+        <a-entity id="target-3" mindar-image-target="targetIndex: 3">
+            <a-video webkit-playsinline playsinline width="1" height="0.552" position="0 0 0" src="#video-4"></a-video>
+        </a-entity>
+
+        <a-entity id="target-4" mindar-image-target="targetIndex: 4">
+            <a-video webkit-playsinline playsinline width="1" height="0.552" position="0 0 0" src="#video-5"></a-video>
+        </a-entity>
+
+        <a-entity id="target-5" mindar-image-target="targetIndex: 5">
+            <a-video webkit-playsinline playsinline width="1" height="0.552" position="0 0 0" src="#video-6"></a-video>
+        </a-entity>
+
+        <a-entity id="target-6" mindar-image-target="targetIndex: 6">
+            <a-video webkit-playsinline playsinline width="1" height="0.552" position="0 0 0" src="#video-7"></a-video>
+        </a-entity>
+
+        <a-entity id="target-7" mindar-image-target="targetIndex: 7">
+            <a-video webkit-playsinline playsinline width="1" height="0.552" position="0 0 0" src="#video-8"></a-video>
+        </a-entity>
+
+        <a-entity id="target-8" mindar-image-target="targetIndex: 8">
+            <a-video webkit-playsinline playsinline width="1" height="0.552" position="0 0 0" src="#video-9"></a-video>
+        </a-entity>
+
+        <a-entity id="target-9" mindar-image-target="targetIndex: 9">
+            <a-video webkit-playsinline playsinline width="1" height="0.552" position="0 0 0" src="#video-10"></a-video>
+        </a-entity>
+    </a-scene>
+</body>
+</html>
