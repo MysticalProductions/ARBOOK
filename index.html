@@ -8,8 +8,9 @@
             const videoElements = [];
             let currentVideo = null;
             const previewButton = document.querySelector("#preview");
+            const targetEntities = {}; // Store target entities
 
-            for (let i = 1; i <= 10; i++) { // Start from 1 to match video IDs
+            for (let i = 1; i <= 10; i++) {
                 const videoElement = document.querySelector(`#video-${i}`);
                 videoElements.push(videoElement);
             }
@@ -18,11 +19,12 @@
 
             scene.addEventListener('targetFound', (event) => {
                 const targetIndex = event.detail.targetIndex;
-                const videoIndex = targetIndex + 1; // Adjust index to match video IDs
+                const videoIndex = targetIndex + 1;
 
                 if (videoIndex >= 1 && videoIndex <= 10) {
                     currentVideo = document.querySelector(`#video-${videoIndex}`);
                     previewButton.setAttribute('visible', true);
+                    targetEntities[targetIndex] = event.target; // Store target entity
                 }
             });
 
@@ -35,6 +37,7 @@
                     currentVideo.currentTime = 0;
                     previewButton.setAttribute('visible', false);
                     currentVideo = null;
+                    delete targetEntities[targetIndex]; // Remove target entity from storage
                 }
             });
 
