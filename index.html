@@ -8,42 +8,29 @@
             const videoElements = [];
             let currentVideo = null;
             const previewButton = document.querySelector("#preview");
-            const targetEntities = {}; // Store target entities
-
-            for (let i = 1; i <= 10; i++) {
+            const targetEntity =  document.querySelector('#mytarget');
+            for (let i = 0; i < 10; i++) {
+                
                 const videoElement = document.querySelector(`#video-${i}`);
                 videoElements.push(videoElement);
+                targetEntity.addEventListener("targetFound", event => {
+                    currentVideo = videoElement;
+                    previewButton.setAttribute("visible", true);
+                });
+
+                targetEntity.addEventListener("targetLost", event => {
+                    if (currentVideo === videoElement) {
+                        videoElement.pause();
+                        videoElement.currentTime = 0;
+                        previewButton.setAttribute("visible", false);
+                        currentVideo = null;
+                    }
+                });
             }
-
-            const scene = document.querySelector('a-scene');
-
-            scene.addEventListener('targetFound', (event) => {
-                const targetIndex = event.detail.targetIndex;
-                const videoIndex = targetIndex + 1;
-
-                if (videoIndex >= 1 && videoIndex <= 10) {
-                    currentVideo = document.querySelector(`#video-${videoIndex}`);
-                    previewButton.setAttribute('visible', true);
-                    targetEntities[targetIndex] = event.target; // Store target entity
-                }
-            });
-
-            scene.addEventListener('targetLost', (event) => {
-                const targetIndex = event.detail.targetIndex;
-                const videoIndex = targetIndex + 1;
-
-                if (currentVideo && currentVideo.id === `video-${videoIndex}`) {
-                    currentVideo.pause();
-                    currentVideo.currentTime = 0;
-                    previewButton.setAttribute('visible', false);
-                    currentVideo = null;
-                    delete targetEntities[targetIndex]; // Remove target entity from storage
-                }
-            });
 
             previewButton.addEventListener('click', () => {
                 if (currentVideo) {
-                    previewButton.setAttribute('visible', false);
+                    previewButton.setAttribute("visible", false);
                     currentVideo.play();
                 }
             });
@@ -71,6 +58,46 @@
 
         <a-image id="preview" visible="false" class="clickable" src="#preview-image" alpha-test="0.5" width="0.2" height="0.2" position="0 0 0.1">
         </a-image>
+
+        <a-entity id="mytarget" mindar-image-target="targetIndex: 0">
+            <a-video webkit-playsinline playsinline width="1" height="0.552" position="0 0 0" src="#video-1"></a-video>
+        </a-entity>
+
+        <a-entity id="mytarget" mindar-image-target="targetIndex: 1">
+            <a-video webkit-playsinline playsinline width="1" height="0.552" position="0 0 0" src="#video-2"></a-video>
+        </a-entity>
+
+        <a-entity id="mytarget" mindar-image-target="targetIndex: 2">
+            <a-video webkit-playsinline playsinline width="1" height="0.552" position="0 0 0" src="#video-3"></a-video>
+        </a-entity>
+
+        <a-entity id="mytarget" mindar-image-target="targetIndex: 3">
+            <a-video webkit-playsinline playsinline width="1" height="0.552" position="0 0 0" src="#video-4"></a-video>
+        </a-entity>
+
+        <a-entity id="mytarget" mindar-image-target="targetIndex: 4">
+            <a-video webkit-playsinline playsinline width="1" height="0.552" position="0 0 0" src="#video-5"></a-video>
+        </a-entity>
+
+        <a-entity id="mytarget" mindar-image-target="targetIndex: 5">
+            <a-video webkit-playsinline playsinline width="1" height="0.552" position="0 0 0" src="#video-6"></a-video>
+        </a-entity>
+
+        <a-entity id="mytarget" mindar-image-target="targetIndex: 6">
+            <a-video webkit-playsinline playsinline width="1" height="0.552" position="0 0 0" src="#video-7"></a-video>
+        </a-entity>
+
+        <a-entity id="mytarget" mindar-image-target="targetIndex: 7">
+            <a-video webkit-playsinline playsinline width="1" height="0.552" position="0 0 0" src="#video-8"></a-video>
+        </a-entity>
+
+        <a-entity id="mytarget" mindar-image-target="targetIndex: 8">
+            <a-video webkit-playsinline playsinline width="1" height="0.552" position="0 0 0" src="#video-9"></a-video>
+        </a-entity>
+
+        <a-entity id="mytarget" mindar-image-target="targetIndex: 9">
+            <a-video webkit-playsinline playsinline width="1" height="0.552" position="0 0 0" src="#video-10"></a-video>
+        </a-entity>
     </a-scene>
 </body>
 </html>
