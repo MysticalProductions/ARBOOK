@@ -6,54 +6,41 @@
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
     <script>
         window.onload = function () {
-            let currentVideo = null;
+            let currentVideo = document.createElement("video");
+            currentVideo.setAttribute("id", "shared-video");
+            currentVideo.setAttribute("webkit-playsinline", "");
+            currentVideo.setAttribute("playsinline", "");
+            currentVideo.setAttribute("loop", "true");
+            document.body.appendChild(currentVideo);
+
             let currentTarget = null;
 
             for (let i = 0; i < 10; i++) {
                 const previewButton = document.querySelector(`#preview-${i}`);
                 const targetEntity = document.querySelector(`#mytarget-${i}`);
+                const aVideo = document.querySelector(`#a-video`);
 
                 targetEntity.addEventListener("targetFound", () => {
-                    if (currentVideo) {
+                    if (currentTarget !== i) {
                         currentVideo.pause();
                         currentVideo.currentTime = 0;
+                        currentVideo.src = `./Video/${i + 1}.mp4`;
+                        currentVideo.load();
+                        currentTarget = i;
                     }
-
                     previewButton.setAttribute("visible", true);
-                    currentTarget = i;
                 });
 
                 targetEntity.addEventListener("targetLost", () => {
-                    if (currentVideo) {
-                        currentVideo.pause();
-                        currentVideo.currentTime = 0;
-                        currentVideo.removeAttribute("src");
-                    }
+                    currentVideo.pause();
+                    currentVideo.currentTime = 0;
                     previewButton.setAttribute("visible", false);
-                    currentVideo = null;
                 });
 
                 previewButton.addEventListener("click", () => {
-                    if (currentVideo) {
-                        currentVideo.pause();
-                        currentVideo.currentTime = 0;
-                    }
-
-                    // Create video dynamically
-                    currentVideo = document.createElement("video");
-                    currentVideo.setAttribute("id", `video-${currentTarget}`);
-                    currentVideo.setAttribute("webkit-playsinline", "");
-                    currentVideo.setAttribute("playsinline", "");
-                    currentVideo.setAttribute("loop", "true");
-                    currentVideo.src = `./Video/${currentTarget + 1}.mp4`;
-                    document.body.appendChild(currentVideo);
-
-                    // Assign to a-video
-                    const aVideo = document.querySelector(`#a-video-${currentTarget}`);
-                    aVideo.setAttribute("src", `#video-${currentTarget}`);
-
                     previewButton.setAttribute("visible", false);
                     currentVideo.play();
+                    aVideo.setAttribute("src", "#shared-video");
                 });
             }
         };
@@ -67,54 +54,47 @@
 
         <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;" raycaster="far: 10000; objects: .clickable"></a-camera>
 
-        <!-- Markers and Video Containers -->
+        <!-- Single A-Video that switches source dynamically -->
+        <a-video id="a-video" width="1" height="0.552" position="0 0 0"></a-video>
+
+        <!-- Markers -->
         <a-entity id="mytarget-0" mindar-image-target="targetIndex: 0">
-            <a-video id="a-video-0" width="1" height="0.552" position="0 0 0"></a-video>
             <a-image id="preview-0" visible="false" class="clickable" src="#preview-image" width="0.2" height="0.2" position="0 0 0.1"></a-image>
         </a-entity>
 
         <a-entity id="mytarget-1" mindar-image-target="targetIndex: 1">
-            <a-video id="a-video-1" width="1" height="0.552" position="0 0 0"></a-video>
             <a-image id="preview-1" visible="false" class="clickable" src="#preview-image" width="0.2" height="0.2" position="0 0 0.1"></a-image>
         </a-entity>
 
         <a-entity id="mytarget-2" mindar-image-target="targetIndex: 2">
-            <a-video id="a-video-2" width="1" height="0.552" position="0 0 0"></a-video>
             <a-image id="preview-2" visible="false" class="clickable" src="#preview-image" width="0.2" height="0.2" position="0 0 0.1"></a-image>
         </a-entity>
 
         <a-entity id="mytarget-3" mindar-image-target="targetIndex: 3">
-            <a-video id="a-video-3" width="1" height="0.552" position="0 0 0"></a-video>
             <a-image id="preview-3" visible="false" class="clickable" src="#preview-image" width="0.2" height="0.2" position="0 0 0.1"></a-image>
         </a-entity>
 
         <a-entity id="mytarget-4" mindar-image-target="targetIndex: 4">
-            <a-video id="a-video-4" width="1" height="0.552" position="0 0 0"></a-video>
             <a-image id="preview-4" visible="false" class="clickable" src="#preview-image" width="0.2" height="0.2" position="0 0 0.1"></a-image>
         </a-entity>
 
         <a-entity id="mytarget-5" mindar-image-target="targetIndex: 5">
-            <a-video id="a-video-5" width="1" height="0.552" position="0 0 0"></a-video>
             <a-image id="preview-5" visible="false" class="clickable" src="#preview-image" width="0.2" height="0.2" position="0 0 0.1"></a-image>
         </a-entity>
 
         <a-entity id="mytarget-6" mindar-image-target="targetIndex: 6">
-            <a-video id="a-video-6" width="1" height="0.552" position="0 0 0"></a-video>
             <a-image id="preview-6" visible="false" class="clickable" src="#preview-image" width="0.2" height="0.2" position="0 0 0.1"></a-image>
         </a-entity>
 
         <a-entity id="mytarget-7" mindar-image-target="targetIndex: 7">
-            <a-video id="a-video-7" width="1" height="0.552" position="0 0 0"></a-video>
             <a-image id="preview-7" visible="false" class="clickable" src="#preview-image" width="0.2" height="0.2" position="0 0 0.1"></a-image>
         </a-entity>
 
         <a-entity id="mytarget-8" mindar-image-target="targetIndex: 8">
-            <a-video id="a-video-8" width="1" height="0.552" position="0 0 0"></a-video>
             <a-image id="preview-8" visible="false" class="clickable" src="#preview-image" width="0.2" height="0.2" position="0 0 0.1"></a-image>
         </a-entity>
 
         <a-entity id="mytarget-9" mindar-image-target="targetIndex: 9">
-            <a-video id="a-video-9" width="1" height="0.552" position="0 0 0"></a-video>
             <a-image id="preview-9" visible="false" class="clickable" src="#preview-image" width="0.2" height="0.2" position="0 0 0.1"></a-image>
         </a-entity>
 
