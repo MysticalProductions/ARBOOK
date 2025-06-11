@@ -4,13 +4,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
-     <script>
-    // Load custom dpdb.json BEFORE A-Frame initializes the device profiles
-    fetch('https://arbooktest.netlify.app/dpdb.json')
-      .then(response => response.json())
-      .then(dpdb => {
-        AFRAME.utils.device.deviceParams.dpdb = dpdb;
-      });
+    <script>
+    window.addEventListener('load', () => {
+      fetch('https://arbooktest.netlify.app/assets/dpdb.json')
+        .then(response => response.json())
+        .then(dpdb => {
+          if (AFRAME.utils && AFRAME.utils.device && AFRAME.utils.device.deviceParams) {
+            AFRAME.utils.device.deviceParams.dpdb = dpdb;
+            console.log('Custom dpdb.json loaded successfully');
+          } else {
+            console.warn('A-Frame deviceParams is not available');
+          }
+        })
+        .catch(err => {
+          console.error('Failed to load custom dpdb.json', err);
+        });
+    });
   </script>
     <script>
         window.onload = function () {
