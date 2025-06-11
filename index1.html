@@ -6,7 +6,7 @@
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
     <script>
     window.addEventListener('load', () => {
-      fetch('https://arbooktest.netlify.app/assets/dpdb.json')
+      fetch('./dpdb.json')
         .then(response => response.json())
         .then(dpdb => {
           if (AFRAME.utils && AFRAME.utils.device && AFRAME.utils.device.deviceParams) {
